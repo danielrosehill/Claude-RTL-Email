@@ -1,0 +1,61 @@
+<!--
+  formal.html — RTL skeleton for formal correspondence.
+
+  For mail to a bank, insurer, health fund, utility, municipality, government
+  office, regulator or tribunal — and for the covering note that accompanies a
+  typeset letter.
+
+  Structurally the same as base.html. What it adds is the furniture an
+  institution expects, in the order it expects it, plus a details block that
+  repeats the identifiers the recipient files by. See references/register.md for
+  the wording conventions per language, and references/bidi-rules.md for why the
+  identifiers need dir="ltr".
+
+  ASSUME THE ATTACHMENT WILL NOT BE OPENED BEFORE THE MAIL IS ROUTED. Whoever
+  first reads this message is often deciding which desk it goes to, not deciding
+  the matter. The body has to carry the subject, the file identifier and the
+  request on its own.
+
+  PLACEHOLDERS
+    {{LANG}}            he | ar | fa | ur
+    {{FONT_STACK}}      see references/bidi-rules.md § Fonts
+    {{ADDRESSEE}}       formal opening + body name (Hebrew: לכבוד ...)
+    {{SUBJECT_LABEL}}   Hebrew: הנדון · Arabic: الموضوع
+    {{SUBJECT_LINE}}    name the grievance, not the file
+    {{BODY_HTML}}       <p dir="rtl"> blocks
+    {{DETAILS_ROWS}}    identifier rows; pattern in the comment below
+    {{CLOSING}}         Hebrew: בכבוד רב, · Arabic: وتفضلوا بقبول فائق الاحترام،
+    {{SIGNATURE_HTML}}  sign-off; own LTR container
+-->
+<div dir="rtl" lang="{{LANG}}" style="direction:rtl;text-align:right;color:#1a1a2e;font-size:15px;line-height:1.7;font-family:{{FONT_STACK}};">
+
+  <p dir="rtl" style="margin:0 0 16px;">{{ADDRESSEE}}</p>
+
+  <p dir="rtl" style="margin:0 0 16px;"><strong>{{SUBJECT_LABEL}}: {{SUBJECT_LINE}}</strong></p>
+
+  {{BODY_HTML}}
+
+  <!--
+    Identifier block. Every value here is a run of digits and separators, so
+    every one gets dir="ltr" — without it the separators in an account number,
+    phone number or date reorder. This is the single most common way an RTL
+    email embarrasses itself, because it corrupts precisely the strings the
+    recipient will use to find the file.
+
+    Row pattern:
+      <tr>
+        <td style="padding:2px 0 2px 12px;color:#5f5f5f;">LABEL</td>
+        <td style="padding:2px 0;" dir="ltr" align="right">VALUE</td>
+      </tr>
+  -->
+  <table dir="rtl" cellpadding="0" cellspacing="0" border="0"
+         style="margin:20px 0 0;font-size:14px;line-height:1.6;">
+    {{DETAILS_ROWS}}
+  </table>
+
+  <p dir="rtl" style="margin:20px 0 0;">{{CLOSING}}</p>
+
+</div>
+<div dir="ltr" style="direction:ltr;text-align:left;margin-top:8px;color:#1a1a2e;font-size:15px;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  {{SIGNATURE_HTML}}
+</div>

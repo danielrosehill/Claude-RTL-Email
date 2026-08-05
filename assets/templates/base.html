@@ -1,0 +1,29 @@
+<!--
+  base.html — minimal RTL skeleton for an email body.
+
+  The default. Use this unless the message is formal correspondence to an
+  institution, in which case start from formal.html.
+
+  Deliberately no wrapper table, no fixed 600px width, no centred card. A card
+  is what a newsletter looks like; one-to-one mail should look like a person
+  typed it. Gmail's composer also renders a fixed-width container as a floating
+  box with a large gutter — and in an RTL message that gutter lands on the wrong
+  side, so the message reads as broken rather than merely styled.
+
+  PLACEHOLDERS
+    {{LANG}}            he | ar | fa | ur
+    {{FONT_STACK}}      see references/bidi-rules.md § Fonts
+                        Hebrew: Arial,'Segoe UI',-apple-system,sans-serif
+                        Arabic: Tahoma,Arial,'Segoe UI',sans-serif
+    {{BODY_HTML}}       body, as <p dir="rtl"> blocks — dir on EVERY block
+    {{SIGNATURE_HTML}}  sign-off; sits in its own LTR container below
+
+  Send as an HTML body. Include a plain-text alternative for completeness — see
+  plain-fallback.txt — but do not rely on it to render.
+-->
+<div dir="rtl" lang="{{LANG}}" style="direction:rtl;text-align:right;color:#1a1a2e;font-size:15px;line-height:1.7;font-family:{{FONT_STACK}};">
+  {{BODY_HTML}}
+</div>
+<div dir="ltr" style="direction:ltr;text-align:left;margin-top:24px;color:#1a1a2e;font-size:15px;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
+  {{SIGNATURE_HTML}}
+</div>

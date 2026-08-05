@@ -1,0 +1,26 @@
+RTL plain-text fallback — best-effort only. Read this before relying on it.
+
+Plain text has no direction metadata. Nothing in this file makes a client render
+RTL; it only improves the odds. The HTML body is the real answer, and this part
+exists so the message is well-formed for text-only clients, not so it looks
+right in them.
+
+The one thing that helps: prefix every paragraph with U+200F (RIGHT-TO-LEFT
+MARK). It is invisible. Below, each line begins with one.
+
+  ‏שלום רב,
+  ‏
+  ‏גוף ההודעה כאן.
+  ‏
+  ‏בכבוד רב,
+  ‏שם השולח
+
+Notes:
+
+- Insert U+200F literally, not as "‏" or "&rlm;" — neither is interpreted
+  in a plain-text part.
+- Keep identifiers (account numbers, phone numbers, dates) on their own line
+  where possible. A number alone on a line cannot be reordered by surrounding
+  text.
+- Do not spend effort tuning this. If it matters that the message looks right,
+  it matters that the recipient sees the HTML part.
