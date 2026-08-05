@@ -1,9 +1,23 @@
 {
   "name": "rtl-email",
-  "version": "0.1.0",
-  "description": "Send email in right-to-left scripts (Hebrew, Arabic, Farsi, Urdu) that actually renders right-to-left. Plain-text email carries no direction metadata, so RTL bodies render LTR in many clients; this plugin supplies dir=rtl HTML templates and a send skill for Google Workspace MCP and Resend.",
-  "author": { "name": "Daniel Rosehill", "url": "https://github.com/danielrosehill" },
+  "version": "0.2.0",
+  "description": "Send email in right-to-left scripts (Hebrew, Arabic, Farsi, Urdu) that actually renders right-to-left. Plain-text email carries no direction metadata, so RTL bodies render LTR in many clients and multi-part numbers reorder. Ships dir=rtl HTML templates, separate personal and business send skills that inherit the user's saved signature profiles, and a one-time signature setup skill. Sends via Google Workspace MCP or Resend.",
+  "author": {
+    "name": "Daniel Rosehill",
+    "url": "https://github.com/danielrosehill"
+  },
   "repository": "https://github.com/danielrosehill/Claude-RTL-Email",
   "license": "MIT",
-  "keywords": ["rtl", "hebrew", "arabic", "email", "bidi", "gmail", "resend", "mcp", "i18n"]
+  "keywords": [
+    "rtl",
+    "hebrew",
+    "arabic",
+    "email",
+    "bidi",
+    "gmail",
+    "resend",
+    "mcp",
+    "i18n",
+    "signatures"
+  ]
 }

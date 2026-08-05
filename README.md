@@ -29,18 +29,43 @@ to find the file.
 
 | Path | What |
 |---|---|
-| `skills/send-rtl-email/` | The skill. Detects the script, picks a template, composes at the right register, previews, sends. |
-| `assets/templates/base.html` | Minimal RTL body. The default. |
+| `skills/configure-rtl-signatures/` | One-time setup. Collects the user's signature, name in both scripts, contact details and organisation identifiers, and persists them. |
+| `skills/send-rtl-personal-email/` | Personal mail. Inherits the `personal` profile and an informal register. |
+| `skills/send-rtl-business-email/` | Business and institutional mail. Inherits the `business` profile, its identifiers, and a formal register. |
+| `assets/templates/base.html` | Minimal RTL body. |
 | `assets/templates/formal.html` | RTL body for institutional correspondence — addressee, subject line, identifier block, formal closing. |
 | `assets/templates/plain-fallback.txt` | Best-effort plain-text alternative, and why not to rely on it. |
-| `references/bidi-rules.md` | **Read this before writing an RTL email.** What breaks and why. |
+| `references/bidi-rules.md` | **Read before writing an RTL email.** What breaks and why. |
 | `references/register.md` | Formal vs ordinary register, per language. |
+| `references/composing.md` | The send sequence shared by both send skills. |
 | `scripts/preview.sh` | Render an HTML file to PNG and look at it before sending. |
 | `scripts/build-examples.py` | Regenerates `examples/` from the templates. |
 
+## Signatures are yours, and stored once
+
+Run `configure-rtl-signatures` on first use. It asks for your name in both
+scripts, your contact details, and — for business — your company or national
+identifiers, then writes them to:
+
+```
+${CLAUDE_USER_DATA:-${XDG_DATA_HOME:-$HOME/.local/share}/claude-plugins}/rtl-email/config.json
+```
+
+Nothing is written to `~/.claude/`. The two send skills read that file and stop
+asking. If it is missing they will route you back to setup rather than invent a
+signature — an email closing with an unfilled `{{SIGNATURE_HTML}}` is worse than
+one that renders LTR.
+
+The personal and business profiles carry different signatures, different
+registers and different identifier blocks, which is the entire reason they are
+separate skills.
+
+**Your RTL name is asked for, never transliterated for you.** People have a
+spelling of their own name and being handed a plausible alternative reads badly.
+
 ## Transports
 
-The skill sends through either:
+Both send skills work with either:
 
 - **Google Workspace MCP** (Gmail) — pass `body_format: "html"`. Omitting it is
   the entire bug this plugin exists to prevent.
