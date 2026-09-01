@@ -94,7 +94,56 @@ it.
 auto-appends a signature, so the profile's signature must be filled in.
 
 **Attachments.** Both transports generally accept a server-side-fetched URL as
-well as inline base64. Prefer a URL above ~100 KB.
+well as inline base64. Prefer a URL above ~100 KB. Attachments do **not**
+interfere with `body_format: "html"` — verified 2026-09-01 with a controlled
+A/B send, one with an attachment and one without; both rendered as HTML.
+
+### Pass raw HTML. Never entity-escape the body.
+
+**This is the failure that actually happened, on 2026-09-01, in a formal letter
+to a contractor.** The body was written with `&amp;lt;div dir="rtl"&amp;gt;` instead of
+`<div dir="rtl">`. `body_format` was correctly set to `"html"`, the transport
+behaved correctly, and the message went out as `text/html` — carrying escaped
+markup. The mail client dutifully rendered `&amp;lt;` as `<`, so **every tag appeared
+as visible text in the recipient's window.**
+
+It is a silent failure at every stage before delivery:
+
+- No tool error. The send succeeds and returns a message ID.
+- `body_format: "html"` is *not* the culprit and changing it will not help.
+- Reading the message back shows `<div dir="rtl">`, which looks like correct
+  HTML source rather than the bug — the entities are decoded on the way out.
+
+The tell is in what you wrote, not in what comes back. **If the body string you
+are about to pass contains `&amp;lt;` or `&amp;gt;`, it is wrong.** The first character of
+an HTML body should be a literal `<`.
+
+### Verify after sending, before you do anything else
+
+One read-back, every time, on anything formal:
+
+```
+get_gmail_message_content(message_id=<returned id>, user_google_email=…)
+```
+
+Compare against this table:
+
+| What the read-back body shows | What it means |
+|---|---|
+| Rendered text, no tags | Correct. HTML body, properly formed |
+| Literal `<div`, `<p>`, `<span dir=` as text | **Escaped-entity bug.** Resend |
+| Your HTML source verbatim, unrendered | Sent as `text/plain`. `body_format` was dropped |
+
+Costs one call. It is the difference between catching this in ten seconds and
+the recipient reading markup.
+
+### When the message carries a formal letter as a PDF
+
+Prefer a **short plain-text body** with the RLM marks from
+`assets/templates/plain-fallback.txt`, and let the typeset PDF carry the letter.
+A four-line body has almost no surface area for a direction bug, contains no
+identifiers that bidi can reorder, and cannot leak markup. Reserve the full HTML
+body for messages where the body *is* the letter.
 
 ## 7. Subject line
 

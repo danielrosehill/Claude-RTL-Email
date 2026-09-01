@@ -47,5 +47,12 @@ Follow `references/composing.md`. In summary:
 ## Do not
 
 - Call the send tool directly without coming through here.
+- **Entity-escape the HTML body.** Pass raw `<div dir="rtl">`, never
+  `&lt;div dir="rtl"&gt;`. Escaped markup sends without error and renders as
+  visible tags in the recipient's window. This has happened in real
+  correspondence — see `references/composing.md`.
+- **Send anything formal without reading the message back.** One
+  `get_gmail_message_content` call on the returned ID catches both the
+  escaping bug and a dropped `body_format` in ten seconds.
 - Let a number with internal separators sit unwrapped in RTL text.
 - Rely on the plain-text fallback to carry a reference number. It cannot.
