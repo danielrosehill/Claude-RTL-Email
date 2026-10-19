@@ -44,6 +44,9 @@ with the business variant. In summary:
 5. Preview with `./scripts/preview.sh` and look at it.
 6. Send with **`body_format: "html"`** (Gmail) or as `html` (Resend). Omitting
    it undoes everything above.
+   **On Resend, BCC the profile's own email address** on every message unless it is
+   already a recipient. Resend sends never appear in a Gmail Sent folder, so the BCC
+   is the user's only copy to proof the render.
 
 ## Do not
 

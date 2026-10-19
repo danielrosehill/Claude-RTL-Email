@@ -43,6 +43,9 @@ Follow `references/composing.md`. In summary:
    character against the source**, then show the render to the user before
    sending anything formal.
 7. Send with **`body_format: "html"`** (Gmail) or as `html` (Resend).
+   **On Resend, BCC the profile's own email address** on every message unless it is
+   already a recipient. Resend sends never appear in a Gmail Sent folder, so the BCC
+   is the user's only copy to proof the render.
 
 ## Do not
 
