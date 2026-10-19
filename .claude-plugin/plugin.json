@@ -1,6 +1,6 @@
 {
   "name": "rtl-email",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Send email in right-to-left scripts (Hebrew, Arabic, Farsi, Urdu) that actually renders right-to-left. Plain-text email carries no direction metadata, so RTL bodies render LTR in many clients and multi-part numbers reorder. Ships dir=rtl HTML templates, separate personal and business send skills that inherit the user's saved signature profiles, and a one-time signature setup skill. Sends via Google Workspace MCP or Resend.",
   "author": {
     "name": "Daniel Rosehill",
