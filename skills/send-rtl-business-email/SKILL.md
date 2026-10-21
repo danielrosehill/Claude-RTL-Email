@@ -59,3 +59,10 @@ Follow `references/composing.md`. In summary:
   escaping bug and a dropped `body_format` in ten seconds.
 - Let a number with internal separators sit unwrapped in RTL text.
 - Rely on the plain-text fallback to carry a reference number. It cannot.
+
+## AI-assistance line
+
+If the profile has `ai_line`, append it as the last element, after the signature: its own
+`<p dir="rtl" lang="<lang>">` in small grey italics, inside the RTL wrapper and outside the
+signature block. Skip it only when the user says to leave it off for this send. If the
+profile has no `ai_line`, add nothing.

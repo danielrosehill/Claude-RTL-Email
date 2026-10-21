@@ -64,3 +64,10 @@ with the business variant. In summary:
   target.
 - Force the signature RTL to match the body. It belongs in its own `dir="ltr"`
   block, which the templates already provide.
+
+## AI-assistance line
+
+If the profile has `ai_line`, append it as the last element, after the signature: its own
+`<p dir="rtl" lang="<lang>">` in small grey italics, inside the RTL wrapper and outside the
+signature block. Skip it only when the user says to leave it off for this send. If the
+profile has no `ai_line`, add nothing.
