@@ -42,7 +42,7 @@ more can be added and named freely):
 | `identifiers` | Business only, and optional: national ID, company number, VAT number. Label/value pairs that go in the formal template's details block |
 | `org`, `org_rtl` | Business only |
 | `log_dir` | Optional pointer to where sent correspondence is recorded |
-| `ai_line` | Optional. A short AI-assistance note in the profile's language (e.g. *מייל זה נכתב בעזרת עוזר בינה מלאכותית.*). If set, the send skills append it after the signature on every send unless the user says to leave it off. Ask whether they want one; never set it on their behalf |
+| `ai_line` | Optional. A short AI-assistance note in the profile's language (e.g. (מייל זה נכתב בעזרת עוזר בינה מלאכותית.)). If set, the send skills append it after the signature on every send unless the user says to leave it off. Ask whether they want one; never set it on their behalf |
 
 **Ask whether the signature should be in Latin or RTL script.** A Latin-script
 signature under an RTL body is normal and correct, and it is what most bilingual

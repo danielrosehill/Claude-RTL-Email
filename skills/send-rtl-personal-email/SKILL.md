@@ -68,6 +68,6 @@ with the business variant. In summary:
 ## AI-assistance line
 
 If the profile has `ai_line`, append it as the last element, after the signature: its own
-`<p dir="rtl" lang="<lang>">` in small grey italics, inside the RTL wrapper and outside the
+`<p dir="rtl" lang="<lang>">` in small grey text, in brackets, inside the RTL wrapper and outside the
 signature block. Skip it only when the user says to leave it off for this send. If the
 profile has no `ai_line`, add nothing.
